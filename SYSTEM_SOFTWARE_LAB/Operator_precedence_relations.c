@@ -4,9 +4,9 @@
 
 struct production
 {
-  char S;
-  char exp[10][20];
-  int noofexp;
+  char S; //NONTERMINAL
+  char exp[10][20];//PRODUCTIONS WITH this NON TERMINAL AT LEFT
+  int noofexp;//NO OF PRO of this
   int leading[20];
   int trailing[20];
   int lc;
@@ -106,7 +106,7 @@ void readpro()
   while(fgets(s,100,in))
     {
       k=strchr(s+3,';');
-      if(k!=0) strcpy(k,"\0\0");    
+      if(k!=0) strcpy(k,"\0\0");    //replace ';' by '\0'
       i=getpro(s[0]);
       if(i<0)
 	{
@@ -149,9 +149,7 @@ void leading(int i)
 	{
 	  if(isterminal(p[j])!=-1)
 	    {
-	      //  productions[i].leading[(productions[i].lc)++]=p[j];
-	      // break;
-	      insert(i,p[j],0);
+	      insert(i,p[j],0); //if terminal
 	    }
 	  else if(j==0)
 	    {
@@ -159,8 +157,6 @@ void leading(int i)
 	      if(lead==i) continue;
 	      for(l=0;l<productions[lead].lc;l++)
 		{
-		  //	  productions[i].leading[(productions[i].lc)++]
-		    //	  =productions[lead].leading[l];
 		  insert(i,productions[lead].leading[l],0);
 		}
 	    }	 
@@ -199,9 +195,7 @@ void trailing(int i)
 	{
 	  if(isterminal(p[j])!=-1)
 	    {
-	      insert(i,p[j],1);
-	      // productions[i].trailing[(productions[i].tc)++]=p[j];
-	      //  break;
+	      insert(i,p[j],1);//if teminal
 	    }
 	   else if(j==strlen(p)-1)
 	    {
@@ -209,8 +203,6 @@ void trailing(int i)
 	      if(t==i) continue;
 	      for(l=0;l<productions[t].tc;l++)
 		{
-		  //  productions[i].trailing[(productions[i].tc)++]
-		  //		  =productions[t].trailing[l];
 		  insert(i,productions[t].trailing[l],1);
 		}
 	    }	 

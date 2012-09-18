@@ -139,7 +139,7 @@ void first(int i)
       p=nonterminals[i].exp[k];
       for(j=0,ise=1;j<strlen(p)&&ise;j++)
 	{
-	  if(isterminal(p[j])!=-1||p[j]=='e')
+	  if(isterminal(p[j])!=-1||p[j]=='e') //terminal or e
 	    {
 	      insert(i,p[j],0);
 	      ise=0;
